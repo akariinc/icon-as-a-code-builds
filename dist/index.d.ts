@@ -49,8 +49,8 @@ declare class LogoBase {
 	get size(): number;
 	constructor(svg: SVGElement, id: "iris" | "paint", props: LogoProperty);
 	update(props: Partial<LogoProperty>): void;
-	show(): void;
-	hide(): void;
+	append(): void;
+	remove(): void;
 	anim(props: Partial<LogoProperty>): void;
 	protected getSVG(): string;
 	getSVGURL(): string;
@@ -83,7 +83,7 @@ export declare class AkariLogo {
 	get size(): number;
 	set size(value: number);
 	props: LogoProperty;
-	constructor(type: "iris" | "paint", props: LogoProperty);
+	constructor(type: "iris" | "paint", props: Partial<LogoProperty>);
 	update(props: Partial<LogoProperty>): void;
 	anim(props: Partial<LogoProperty>, duration: number): void;
 }
