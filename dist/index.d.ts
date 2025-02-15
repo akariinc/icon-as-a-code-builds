@@ -19,6 +19,7 @@ export interface LogoProperty {
 	paintOverlap: number;
 	animCurve: string;
 	animDuration: number;
+	size: number;
 	[ken: string]: string | number | boolean;
 }
 declare class ShapeBase {

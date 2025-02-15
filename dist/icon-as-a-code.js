@@ -17,7 +17,7 @@ class w {
       t.setAttribute(r, i[r].toString());
   }
 }
-class Q extends w {
+class z extends w {
   // ここのperはテールの距離を含めて0 - 1の値
   // onlyCircleがtrueの場合は、perが1のものが、そもそも来ない
   constructor(i, r, s, a, c, n, o, l, p) {
@@ -45,7 +45,7 @@ class Q extends w {
     }
   }
 }
-class q extends w {
+class Q extends w {
   constructor(t) {
     super("g"), this.setAttributes(this.element, {
       // id: id,
@@ -54,7 +54,7 @@ class q extends w {
     });
   }
 }
-class z extends w {
+class q extends w {
   constructor(i) {
     super("path");
     h(this, "type");
@@ -280,7 +280,7 @@ const S = (e) => {
     h(this, "isEnterFrame");
     h(this, "currentKey");
     h(this, "intervalTimer");
-    this.rootGraphics = new q(i), this.svg = t, this.mask = new z(i), this.currentKey = 0, this.enterFrameFunc = null, this.intervalTimer = 0, this.isEnterFrame = !1, this.props = r;
+    this.rootGraphics = new Q(i), this.svg = t, this.mask = new q(i), this.currentKey = 0, this.enterFrameFunc = null, this.intervalTimer = 0, this.isEnterFrame = !1, this.props = r;
   }
   set size(t) {
     this._size = Math.round(t), this.svg.setAttribute("width", `${this._size}`), this.svg.setAttribute("height", `${this._size}`);
@@ -361,7 +361,7 @@ const M = (e, t, i) => {
 }, T = (e) => {
   const t = e.substring(1), i = parseInt(t.substring(0, 2), 16), r = parseInt(t.substring(2, 4), 16), s = parseInt(t.substring(4, 6), 16);
   return { r: i, g: r, b: s };
-}, ht = (e, t, i) => `#${E(e)}${E(t)}${E(i)}`, E = (e) => {
+}, ht = (e, t, i) => `#${I(e)}${I(t)}${I(i)}`, I = (e) => {
   const t = e.toString(16);
   return t.length === 1 ? `0${t}` : t;
 };
@@ -399,7 +399,7 @@ class O extends y {
         this.props.rgbStart,
         this.props.rgbEnd,
         f
-      ), G = (this.props.opacityEnd - this.props.opacityStart) * C + this.props.opacityStart, $ = new Q(
+      ), G = (this.props.opacityEnd - this.props.opacityStart) * C + this.props.opacityStart, $ = new z(
         F,
         G,
         s,
@@ -446,13 +446,13 @@ class lt extends w {
     ), this.element.setAttribute("transform", "translate(10, 0) rotate(90)");
   }
 }
-const I = class I extends w {
+const E = class E extends w {
   constructor() {
     super("g");
     h(this, "stop0");
     h(this, "stop1");
     h(this, "rect");
-    h(this, "id", I._id++);
+    h(this, "id", E._id++);
     this.element.setAttribute("class", "tail-fill");
     const i = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -483,8 +483,8 @@ const I = class I extends w {
     });
   }
 };
-h(I, "_id", 0);
-let x = I;
+h(E, "_id", 0);
+let x = E;
 class P extends y {
   constructor(i, r) {
     super(i, "paint", r);
@@ -547,27 +547,28 @@ class pt {
     h(this, "props");
     this.props = {
       onlyCircle: !1,
-      drawProgress: 0,
-      innerRadius: 0,
-      outerRadius: 0,
+      drawProgress: 1,
+      innerRadius: 7.8313809,
+      outerRadius: 13,
       lineThickness: 0.1,
-      division: 1,
+      division: 90,
       mask: !1,
-      tailEndDistance: 0,
+      tailEndDistance: 1,
       // TODO: leave it for now
       // lineCap: "rectangular",
       opacityStart: 0,
       opacityEnd: 0,
       opacityCurve: "linear",
-      rgbStart: "",
-      rgbEnd: "",
+      rgbStart: "#999999",
+      rgbEnd: "#333333",
       rgbCurve: "linear",
-      paintDivision: 4,
-      paintOverlap: 0.02,
+      paintDivision: 60,
+      paintOverlap: 0.1,
       animCurve: "linear",
       animDuration: 1,
+      size: 140,
       ...i
-    }, this.el = document.createElementNS("http://www.w3.org/2000/svg", "svg"), this.el.setAttribute("width", "100"), this.el.setAttribute("height", "100"), this.el.setAttribute("viewBox", "0 0 26 26"), this._type = t, this.svgLogo = this.type === "iris" ? new O(this.el, this.props) : new P(this.el, this.props), this.svgLogo.append(), this.update(this.props);
+    }, this.el = document.createElementNS("http://www.w3.org/2000/svg", "svg"), this.el.setAttribute("width", "140"), this.el.setAttribute("height", "140"), this.el.setAttribute("viewBox", "0 0 26 26"), this._type = t, this.svgLogo = this.type === "iris" ? new O(this.el, this.props) : new P(this.el, this.props), this.svgLogo.append(), this.update(this.props);
   }
   get type() {
     return this._type;
@@ -582,10 +583,10 @@ class pt {
     this.svgLogo.size = t;
   }
   update(t) {
-    this.props = { ...this.props, ...t }, this.svgLogo.update(this.props);
+    t.size && (this.size = t.size), this.props = { ...this.props, ...t }, this.svgLogo.update(this.props);
   }
   anim(t, i) {
-    this.props = { ...this.props, ...t }, this.props.animDuration = i, this.svgLogo.anim(this.props);
+    this.update(t), this.props.animDuration = i, this.svgLogo.anim(this.props);
   }
 }
 class ut {
@@ -653,7 +654,8 @@ class dt {
       paintDivision: 4,
       paintOverlap: 0.02,
       animCurve: "linear",
-      animDuration: 1
+      animDuration: 1,
+      size: 140.85
     }, this.logo = new pt("paint", this.props), document.getElementById(
       "logo-container"
     ).appendChild(this.logo.el), this.setUIEvent(), this.changeType(
@@ -691,7 +693,7 @@ class dt {
     for (let n = 0; n < r.length; n++) {
       const o = new ut(r[n]);
       o.onChange = (l, p) => {
-        console.log(l, p), this.props[l] = p, this.logo.update(this.props);
+        console.log(l, p), document.getElementsByClassName(`${l}__text`)[0].textContent = p, this.props[l] = p, this.logo.update(this.props);
       }, this.props[o.name] = o.value;
     }
     const s = document.querySelectorAll(".js-ComboBox");
@@ -715,8 +717,8 @@ class dt {
       document.getElementById("size")
     );
     c.onChange = (n, o) => {
-      this.logo.el.style.left = `calc(50% - ${Math.round(o / 2)}px)`, this.logo.el.style.top = `calc(50% - ${Math.round(o / 2)}px)`, this.logo.size = o;
-    }, this.logo.el.classList.add("l-main__svg"), this.logo.el.style.left = `calc(50% - ${Math.round(c.value / 2)}px)`, this.logo.el.style.top = `calc(50% - ${Math.round(c.value / 2)}px)`, this.logo.size = c.value;
+      this.props.size = o, this.logo.el.style.left = `calc(50% - ${Math.round(o / 2)}px)`, this.logo.el.style.top = `calc(50% - ${Math.round(o / 2)}px)`, this.logo.update({ size: o });
+    }, this.props.size = c.value, this.logo.el.classList.add("l-main__svg"), this.logo.el.style.left = `calc(50% - ${Math.round(c.value / 2)}px)`, this.logo.el.style.top = `calc(50% - ${Math.round(c.value / 2)}px)`, this.logo.update({ size: c.value });
   }
   changeType(t) {
     t === "0" ? (this.sideUI.classList.remove("--iris"), this.sideUI.classList.add("--paint"), this.logo.type = "paint") : t === "1" && (this.sideUI.classList.add("--iris"), this.sideUI.classList.remove("--paint"), this.logo.type = "iris");
