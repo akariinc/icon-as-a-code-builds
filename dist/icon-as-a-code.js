@@ -468,11 +468,11 @@ const E = class E extends C {
       //0.7
     }), this.stop0 = s, this.stop1 = a, this.rect = h, this.element.appendChild(i), this.element.appendChild(h);
   }
-  draw(i, r, s, a, h, n, o, l) {
+  draw(i, r, s, a, h, n, o, l, p) {
     this.stop0.setAttribute("stop-color", s), this.stop0.setAttribute("stop-opacity", h.toString()), this.stop1.setAttribute("stop-color", a), this.stop1.setAttribute("stop-opacity", n.toString()), this.setAttributes(this.rect, {
       width: i - r,
-      height: l * o,
-      transform: `translate(${r}, 0)`
+      height: p * (l - o),
+      transform: `translate(${r}, ${p * o})`
     });
   }
 };
@@ -513,23 +513,33 @@ class k extends y {
       );
       this.arcContainer.insertBefore(I.element, this.arcContainer.firstChild);
     }
-    this.mask.draw(
+    if (this.mask.draw(
       this.props,
       this.props.outerRadius * (this.props.drawProgress - h) / (1 - h)
-    ), this.props.onlyCircle ? (b(this.rootGraphics.element, this.tail.element), b(this.rootGraphics.element, this.tailCircular.element)) : (this.props.drawProgress > h ? (this.tail.draw(
-      this.props.outerRadius,
-      this.props.innerRadius,
-      x(
-        this.props.rgbStart,
-        this.props.rgbEnd,
-        w(this.props.rgbCurve, h)
-      ),
-      this.props.rgbEnd,
-      (this.props.opacityEnd - this.props.opacityStart) * h + this.props.opacityStart,
-      this.props.opacityEnd,
-      (this.props.drawProgress - h) / (1 - h),
-      r
-    ), this.rootGraphics.element.appendChild(this.tail.element)) : b(this.rootGraphics.element, this.tail.element), b(this.rootGraphics.element, this.tailCircular.element));
+    ), this.props.onlyCircle)
+      b(this.rootGraphics.element, this.tail.element), b(this.rootGraphics.element, this.tailCircular.element);
+    else {
+      if (this.props.drawProgress > h) {
+        const u = (this.props.opacityEnd - this.props.opacityStart) * h + this.props.opacityStart;
+        this.tail.draw(
+          this.props.outerRadius,
+          this.props.innerRadius,
+          x(
+            this.props.rgbStart,
+            this.props.rgbEnd,
+            w(this.props.rgbCurve, h)
+          ),
+          this.props.rgbEnd,
+          u,
+          this.props.opacityEnd,
+          (Math.max(h, this.props.drawStart) - h) / (1 - h),
+          (this.props.drawProgress - h) / (1 - h),
+          r
+        ), this.rootGraphics.element.appendChild(this.tail.element);
+      } else
+        b(this.rootGraphics.element, this.tail.element);
+      b(this.rootGraphics.element, this.tailCircular.element);
+    }
   }
 }
 class ut {
