@@ -1,9 +1,9 @@
 var R = Object.defineProperty;
 var z = (e, t, i) => t in e ? R(e, t, { enumerable: !0, configurable: !0, writable: !0, value: i }) : e[t] = i;
-var h = (e, t, i) => z(e, typeof t != "symbol" ? t + "" : t, i);
+var c = (e, t, i) => z(e, typeof t != "symbol" ? t + "" : t, i);
 class C {
   constructor(t) {
-    h(this, "element");
+    c(this, "element");
     this.element = document.createElementNS(
       "http://www.w3.org/2000/svg",
       t
@@ -20,9 +20,9 @@ class C {
 class Q extends C {
   // ここのperはテールの距離を含めて0 - 1の値
   // onlyCircleがtrueの場合は、perが1のものが、そもそも来ない
-  constructor(i, r, s, a, c, n, o, l, p) {
+  constructor(i, r, s, a, h, n, o, l, p) {
     super("rect");
-    h(this, "edgeY", 0);
+    c(this, "edgeY", 0);
     this.setAttributes(this.element, {
       x: -s / 2,
       y: -a / 2,
@@ -33,14 +33,14 @@ class Q extends C {
     });
     const u = o * p, m = u / n;
     if (m < 1) {
-      const d = 6.28 * m, g = Math.cos(d) * c, v = Math.sin(d) * c, $ = d * 180 / Math.PI;
+      const d = 6.28 * m, g = Math.cos(d) * h, v = Math.sin(d) * h, $ = d * 180 / Math.PI;
       this.setAttributes(this.element, {
         transform: `translate(${g}, ${v}) rotate(${$})`
       });
     } else {
       const d = l - a * 0.5, g = (u - n) / (o - n) || 0;
       this.setAttributes(this.element, {
-        transform: `translate(${c}, ${g * d})`
+        transform: `translate(${h}, ${g * d})`
       }), this.edgeY = g * d + a / 2;
     }
   }
@@ -57,11 +57,11 @@ class q extends C {
 class N extends C {
   constructor(i) {
     super("path");
-    h(this, "type");
+    c(this, "type");
     this.type = i, this.element.setAttribute("class", "iris-mask"), this.element.setAttribute("fill", "red"), this.element.setAttribute("opacity", "0.4");
   }
   draw(i, r) {
-    const s = i.outerRadius, a = i.innerRadius, c = Math.asin(r / s);
+    const s = i.outerRadius, a = i.innerRadius, h = Math.asin(r / s);
     if (i.mask) {
       const n = Math.sqrt(s * s - a * a);
       let o = "";
@@ -105,8 +105,8 @@ class N extends C {
           "d",
           `
           M${a},0
-          L${a},${Math.sin(c) * s}
-          L${Math.cos(c) * s},${Math.sin(c) * s}
+          L${a},${Math.sin(h) * s}
+          L${Math.cos(h) * s},${Math.sin(h) * s}
           A${s},${s} 0 0 1 0,${s}
           A${s},${s} 0 0 1 ${-s},0
           A${s},${s} 0 0 1 0,${-s}
@@ -261,16 +261,16 @@ const M = (e) => {
 }, A = class A {
   constructor(t, i, r) {
     // public props: LogoProperty;
-    h(this, "svg");
-    h(this, "rootGraphics");
-    h(this, "mask");
-    h(this, "props");
-    h(this, "logoId", A._id++);
-    h(this, "_size", 0);
-    h(this, "enterFrameFunc");
-    h(this, "isEnterFrame");
-    h(this, "currentKey");
-    h(this, "intervalTimer");
+    c(this, "svg");
+    c(this, "rootGraphics");
+    c(this, "mask");
+    c(this, "props");
+    c(this, "logoId", A._id++);
+    c(this, "_size", 0);
+    c(this, "enterFrameFunc");
+    c(this, "isEnterFrame");
+    c(this, "currentKey");
+    c(this, "intervalTimer");
     this.rootGraphics = new q(i), this.svg = t, this.mask = new N(i), this.currentKey = 0, this.enterFrameFunc = null, this.intervalTimer = 0, this.isEnterFrame = !1, this.props = r;
   }
   set size(t) {
@@ -295,8 +295,8 @@ const M = (e) => {
     const s = 0;
     this.props.drawProgress = s;
     let a = 0;
-    this.update(t), this.onEnterFrame = (c) => {
-      r += c, r >= i && (r = i), a++;
+    this.update(t), this.onEnterFrame = (h) => {
+      r += h, r >= i && (r = i), a++;
       const n = w(this.props.animCurve, r / i);
       this.props.drawProgress = n, this.update(this.props), r >= i && (this.deleteEnterFrame, console.log("fps = " + a));
     };
@@ -327,9 +327,9 @@ const M = (e) => {
         }
         if (r != i.currentKey)
           return;
-        const c = (/* @__PURE__ */ new Date()).getTime();
-        let n = c - s;
-        n < 0 && (n = 1), i.enterFrameFunc(n), s = c, i.intervalTimer = requestAnimationFrame(() => a());
+        const h = (/* @__PURE__ */ new Date()).getTime();
+        let n = h - s;
+        n < 0 && (n = 1), i.enterFrameFunc(n), s = h, i.intervalTimer = requestAnimationFrame(() => a());
       })();
     }
   }
@@ -340,7 +340,7 @@ const M = (e) => {
     return this.isEnterFrame = !1, this.enterFrameFunc = null, cancelAnimationFrame(this.intervalTimer), this.intervalTimer = -1, !0;
   }
 };
-h(A, "_id", 0);
+c(A, "_id", 0);
 let y = A;
 const x = (e, t, i) => {
   const r = O(e), s = O(t);
@@ -359,9 +359,9 @@ const x = (e, t, i) => {
 class P extends y {
   constructor(i, r) {
     super(i, "iris", r);
-    h(this, "lineContainer");
+    c(this, "lineContainer");
     // こちらにはマスクかけたくないので尻尾用はコンテナを分ける
-    h(this, "lineTailContainer");
+    c(this, "lineTailContainer");
     this.lineContainer = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "g"
@@ -383,7 +383,7 @@ class P extends y {
   }
   update(i) {
     super.update(i), M(this.lineContainer), M(this.lineTailContainer);
-    const r = this.props.outerRadius * (this.props.tailEndDistance == 0 ? 1 : 65.75 / 70.43), s = this.props.outerRadius - this.props.innerRadius, a = this.props.lineThickness, c = s * 0.5 + this.props.innerRadius, n = c * 2 * Math.PI, o = this.props.onlyCircle ? n : n + r, l = n / o, p = Math.round(
+    const r = this.props.outerRadius * (this.props.tailEndDistance == 0 ? 1 : 65.75 / 70.43), s = this.props.outerRadius - this.props.innerRadius, a = this.props.lineThickness, h = s * 0.5 + this.props.innerRadius, n = h * 2 * Math.PI, o = this.props.onlyCircle ? n : n + r, l = n / o, p = Math.round(
       this.props.division * this.props.drawStart
     ), u = this.props.division * this.props.drawProgress, m = r * (this.props.drawProgress - l) / (1 - l);
     let d = 0;
@@ -397,7 +397,7 @@ class P extends y {
         D,
         s,
         a,
-        c,
+        h,
         n,
         o,
         r,
@@ -409,10 +409,10 @@ class P extends y {
   }
 }
 class lt extends C {
-  constructor(t, i, r, s, a, c) {
+  constructor(t, i, r, s, a, h) {
     super("path");
     const n = Math.cos(r) * i, o = Math.sin(r) * i, l = Math.cos(s) * i, p = Math.sin(s) * i, u = Math.cos(r) * t, m = Math.sin(r) * t, d = Math.cos(s) * t, g = Math.sin(s) * t;
-    this.element.setAttribute("fill", a), this.element.setAttribute("opacity", c.toString()), this.element.setAttribute(
+    this.element.setAttribute("fill", a), this.element.setAttribute("opacity", h.toString()), this.element.setAttribute(
       "d",
       `
       M${n},${o}
@@ -442,10 +442,10 @@ class pt extends C {
 const E = class E extends C {
   constructor() {
     super("g");
-    h(this, "stop0");
-    h(this, "stop1");
-    h(this, "rect");
-    h(this, "id", E._id++);
+    c(this, "stop0");
+    c(this, "stop1");
+    c(this, "rect");
+    c(this, "id", E._id++);
     this.element.setAttribute("class", "tail-fill");
     const i = document.createElementNS(
       "http://www.w3.org/2000/svg",
@@ -461,29 +461,29 @@ const E = class E extends C {
       "stop"
     );
     r.setAttribute("id", `grad-${this.id}`), r.setAttribute("x1", "0"), r.setAttribute("x2", "0"), r.setAttribute("y1", "0"), r.setAttribute("y2", "1"), s.setAttribute("offset", "0%"), a.setAttribute("offset", "100%"), r.appendChild(s), r.appendChild(a), i.appendChild(r);
-    const c = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-    this.setAttributes(c, {
+    const h = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    this.setAttributes(h, {
       fill: `url(#grad-${this.id})`,
       opacity: 1
       //0.7
-    }), this.stop0 = s, this.stop1 = a, this.rect = c, this.element.appendChild(i), this.element.appendChild(c);
+    }), this.stop0 = s, this.stop1 = a, this.rect = h, this.element.appendChild(i), this.element.appendChild(h);
   }
-  draw(i, r, s, a, c, n, o, l) {
-    this.stop0.setAttribute("stop-color", s), this.stop0.setAttribute("stop-opacity", c.toString()), this.stop1.setAttribute("stop-color", a), this.stop1.setAttribute("stop-opacity", n.toString()), this.setAttributes(this.rect, {
+  draw(i, r, s, a, h, n, o, l) {
+    this.stop0.setAttribute("stop-color", s), this.stop0.setAttribute("stop-opacity", h.toString()), this.stop1.setAttribute("stop-color", a), this.stop1.setAttribute("stop-opacity", n.toString()), this.setAttributes(this.rect, {
       width: i - r,
       height: l * o,
       transform: `translate(${r}, 0)`
     });
   }
 };
-h(E, "_id", 0);
+c(E, "_id", 0);
 let L = E;
 class k extends y {
   constructor(i, r) {
     super(i, "paint", r);
-    h(this, "arcContainer");
-    h(this, "tail");
-    h(this, "tailCircular");
+    c(this, "arcContainer");
+    c(this, "tail");
+    c(this, "tailCircular");
     const s = document.createElementNS("http://www.w3.org/2000/svg", "defs"), a = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "clipPath"
@@ -495,12 +495,11 @@ class k extends y {
   }
   update(i) {
     super.update(i), M(this.arcContainer);
-    const r = this.props.outerRadius * (this.props.tailEndDistance == 0 ? 1 : 65.75 / 70.43), s = (this.props.innerRadius + this.props.outerRadius * 0.5) * 2 * Math.PI, a = s + r, c = s / a, n = this.props.paintDivision, o = 6.28 / n;
-    let l = 0;
-    const p = Math.round(n * this.props.drawStart);
-    this.props.onlyCircle ? l = n * this.props.drawProgress : l = Math.min(n, n * this.props.drawProgress / c);
+    const r = this.props.outerRadius * (this.props.tailEndDistance == 0 ? 1 : 65.75 / 70.43), s = (this.props.innerRadius + this.props.outerRadius * 0.5) * 2 * Math.PI, a = s + r, h = s / a, n = this.props.paintDivision, o = 6.28 / n;
+    let l = 0, p = 0;
+    this.props.onlyCircle ? (p = n * this.props.drawStart, l = n * this.props.drawProgress) : (p = Math.min(n, n * this.props.drawStart / h), l = Math.min(n, n * this.props.drawProgress / h));
     for (let u = p; u < l; u++) {
-      const m = u / n * c, d = w(this.props.rgbCurve, m), g = x(
+      const m = u / n * h, d = w(this.props.rgbCurve, m), g = x(
         this.props.rgbStart,
         this.props.rgbEnd,
         d
@@ -516,29 +515,29 @@ class k extends y {
     }
     this.mask.draw(
       this.props,
-      this.props.outerRadius * (this.props.drawProgress - c) / (1 - c)
-    ), this.props.onlyCircle ? (b(this.rootGraphics.element, this.tail.element), b(this.rootGraphics.element, this.tailCircular.element)) : (this.props.drawProgress > c ? (this.tail.draw(
+      this.props.outerRadius * (this.props.drawProgress - h) / (1 - h)
+    ), this.props.onlyCircle ? (b(this.rootGraphics.element, this.tail.element), b(this.rootGraphics.element, this.tailCircular.element)) : (this.props.drawProgress > h ? (this.tail.draw(
       this.props.outerRadius,
       this.props.innerRadius,
       x(
         this.props.rgbStart,
         this.props.rgbEnd,
-        w(this.props.rgbCurve, c)
+        w(this.props.rgbCurve, h)
       ),
       this.props.rgbEnd,
-      (this.props.opacityEnd - this.props.opacityStart) * c + this.props.opacityStart,
+      (this.props.opacityEnd - this.props.opacityStart) * h + this.props.opacityStart,
       this.props.opacityEnd,
-      (this.props.drawProgress - c) / (1 - c),
+      (this.props.drawProgress - h) / (1 - h),
       r
     ), this.rootGraphics.element.appendChild(this.tail.element)) : b(this.rootGraphics.element, this.tail.element), b(this.rootGraphics.element, this.tailCircular.element));
   }
 }
 class ut {
   constructor(t, i) {
-    h(this, "el");
-    h(this, "svgLogo");
-    h(this, "_type");
-    h(this, "props");
+    c(this, "el");
+    c(this, "svgLogo");
+    c(this, "_type");
+    c(this, "props");
     this.props = {
       onlyCircle: !1,
       drawStart: 0,
@@ -586,9 +585,9 @@ class ut {
 }
 class dt {
   constructor(t) {
-    h(this, "onChange");
-    h(this, "name");
-    h(this, "value");
+    c(this, "onChange");
+    c(this, "name");
+    c(this, "value");
     this.name = t.dataset.name;
     const i = t.querySelector(
       "input"
@@ -605,10 +604,10 @@ class dt {
 }
 class F {
   constructor(t) {
-    h(this, "name");
-    h(this, "text");
-    h(this, "onChange");
-    h(this, "value");
+    c(this, "name");
+    c(this, "text");
+    c(this, "onChange");
+    c(this, "value");
     this.name = t.dataset.name, this.text = t.querySelector(".js-SliderText");
     const i = t.querySelector(
       "input"
@@ -625,10 +624,10 @@ class F {
 }
 class gt {
   constructor() {
-    h(this, "logo");
-    h(this, "sideUI");
-    h(this, "props");
-    h(this, "SVGDownloadButton");
+    c(this, "logo");
+    c(this, "sideUI");
+    c(this, "props");
+    c(this, "SVGDownloadButton");
     this.sideUI = document.querySelector(".js-side"), this.props = {
       onlyCircle: !1,
       drawStart: 0,
@@ -709,12 +708,12 @@ class gt {
         o.name === "shapeType" ? this.changeType(o.value) : (this.props[o.name] = l.target.value, console.log(o.name + " = " + this.props[o.name])), this.logo.update(this.props);
       });
     }
-    const c = new F(
+    const h = new F(
       document.getElementById("size")
     );
-    c.onChange = (n, o) => {
+    h.onChange = (n, o) => {
       this.props.size = o, this.logo.el.style.left = `calc(50% - ${Math.round(o / 2)}px)`, this.logo.el.style.top = `calc(50% - ${Math.round(o / 2)}px)`, this.logo.update({ size: o });
-    }, this.props.size = c.value, this.logo.el.classList.add("l-main__svg"), this.logo.el.style.left = `calc(50% - ${Math.round(c.value / 2)}px)`, this.logo.el.style.top = `calc(50% - ${Math.round(c.value / 2)}px)`, this.logo.update({ size: c.value });
+    }, this.props.size = h.value, this.logo.el.classList.add("l-main__svg"), this.logo.el.style.left = `calc(50% - ${Math.round(h.value / 2)}px)`, this.logo.el.style.top = `calc(50% - ${Math.round(h.value / 2)}px)`, this.logo.update({ size: h.value });
   }
   changeType(t) {
     t === "0" ? (this.sideUI.classList.remove("--iris"), this.sideUI.classList.add("--paint"), this.logo.type = "paint") : t === "1" && (this.sideUI.classList.add("--iris"), this.sideUI.classList.remove("--paint"), this.logo.type = "iris");
