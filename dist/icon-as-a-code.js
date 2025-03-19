@@ -497,7 +497,7 @@ class k extends y {
     super.update(i), M(this.arcContainer);
     const r = this.props.outerRadius * (this.props.tailEndDistance == 0 ? 1 : 65.75 / 70.43), s = (this.props.innerRadius + this.props.outerRadius * 0.5) * 2 * Math.PI, a = s + r, h = s / a, n = this.props.paintDivision, o = 6.28 / n;
     let l = 0, p = 0;
-    this.props.onlyCircle ? (p = n * this.props.drawStart, l = n * this.props.drawProgress) : (p = Math.min(n, n * this.props.drawStart / h), l = Math.min(n, n * this.props.drawProgress / h));
+    this.props.onlyCircle ? (p = Math.round(n * this.props.drawStart), l = n * this.props.drawProgress) : (p = Math.min(n, n * this.props.drawStart / h), l = Math.min(n, n * this.props.drawProgress / h));
     for (let u = p; u < l; u++) {
       const m = u / n * h, d = w(this.props.rgbCurve, m), g = x(
         this.props.rgbStart,
