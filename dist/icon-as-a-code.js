@@ -17,7 +17,7 @@ class C {
       t.setAttribute(r, i[r].toString());
   }
 }
-class Q extends C {
+class N extends C {
   // ここのperはテールの距離を含めて0 - 1の値
   // onlyCircleがtrueの場合は、perが1のものが、そもそも来ない
   constructor(i, r, s, a, h, n, o, l, p) {
@@ -33,9 +33,9 @@ class Q extends C {
     });
     const u = o * p, m = u / n;
     if (m < 1) {
-      const d = 6.28 * m, g = Math.cos(d) * h, v = Math.sin(d) * h, $ = d * 180 / Math.PI;
+      const d = 6.28 * m, g = Math.cos(d) * h, w = Math.sin(d) * h, $ = d * 180 / Math.PI;
       this.setAttributes(this.element, {
-        transform: `translate(${g}, ${v}) rotate(${$})`
+        transform: `translate(${g}, ${w}) rotate(${$})`
       });
     } else {
       const d = l - a * 0.5, g = (u - n) / (o - n) || 0;
@@ -45,7 +45,7 @@ class Q extends C {
     }
   }
 }
-class q extends C {
+class Q extends C {
   constructor(t) {
     super("g"), this.setAttributes(this.element, {
       // id: id,
@@ -54,7 +54,7 @@ class q extends C {
     });
   }
 }
-class N extends C {
+class _ extends C {
   constructor(i) {
     super("path");
     c(this, "type");
@@ -129,18 +129,18 @@ class N extends C {
       );
   }
 }
-const w = (e, t) => {
+const v = (e, t) => {
   switch (e) {
     case "linear":
       return t;
     case "easeInSine":
-      return B(t);
+      return q(t);
     case "easeOutSine":
-      return _(t);
+      return B(t);
     case "easeInOutSine":
-      return U(t);
-    case "easeInQuad":
       return V(t);
+    case "easeInQuad":
+      return U(t);
     case "easeOutQuad":
       return Y(t);
     case "easeInOutQuad":
@@ -179,16 +179,16 @@ const w = (e, t) => {
       return t;
   }
 };
-function B(e) {
+function q(e) {
   return -1 * Math.cos(e * (Math.PI / 2)) + 1;
 }
-function _(e) {
+function B(e) {
   return Math.sin(e * (Math.PI / 2));
 }
-function U(e) {
+function V(e) {
   return -0.5 * (Math.cos(Math.PI * e) - 1);
 }
-function V(e) {
+function U(e) {
   return e * e;
 }
 function Y(e) {
@@ -271,7 +271,7 @@ const M = (e) => {
     c(this, "isEnterFrame");
     c(this, "currentKey");
     c(this, "intervalTimer");
-    this.rootGraphics = new q(i), this.svg = t, this.mask = new N(i), this.currentKey = 0, this.enterFrameFunc = null, this.intervalTimer = 0, this.isEnterFrame = !1, this.props = r;
+    this.rootGraphics = new Q(i), this.svg = t, this.mask = new _(i), this.currentKey = 0, this.enterFrameFunc = null, this.intervalTimer = 0, this.isEnterFrame = !1, this.props = r;
   }
   set size(t) {
     this._size = Math.round(t), this.svg.setAttribute("width", `${this._size}`), this.svg.setAttribute("height", `${this._size}`);
@@ -297,7 +297,7 @@ const M = (e) => {
     let a = 0;
     this.update(t), this.onEnterFrame = (h) => {
       r += h, r >= i && (r = i), a++;
-      const n = w(this.props.animCurve, r / i);
+      const n = v(this.props.animCurve, r / i);
       this.props.drawProgress = n, this.update(this.props), r >= i && (this.deleteEnterFrame, console.log("fps = " + a));
     };
   }
@@ -343,13 +343,13 @@ const M = (e) => {
 c(A, "_id", 0);
 let y = A;
 const x = (e, t, i) => {
-  const r = O(e), s = O(t);
+  const r = T(e), s = T(t);
   return ct(
     Math.round((s.r - r.r) * i + r.r),
     Math.round((s.g - r.g) * i + r.g),
     Math.round((s.b - r.b) * i + r.b)
   );
-}, O = (e) => {
+}, T = (e) => {
   const t = e.substring(1), i = parseInt(t.substring(0, 2), 16), r = parseInt(t.substring(2, 4), 16), s = parseInt(t.substring(4, 6), 16);
   return { r: i, g: r, b: s };
 }, ct = (e, t, i) => `#${S(e)}${S(t)}${S(i)}`, S = (e) => {
@@ -388,11 +388,11 @@ class P extends y {
     ), u = this.props.division * this.props.drawProgress, m = r * (this.props.drawProgress - l) / (1 - l);
     let d = 0;
     for (let g = p; g <= u; g++) {
-      const v = g / this.props.division, $ = w(this.props.opacityCurve, v), I = w(this.props.rgbCurve, v), G = x(
+      const w = g / this.props.division, $ = v(this.props.opacityCurve, w), I = v(this.props.rgbCurve, w), G = x(
         this.props.rgbStart,
         this.props.rgbEnd,
         I
-      ), D = (this.props.opacityEnd - this.props.opacityStart) * $ + this.props.opacityStart, f = new Q(
+      ), D = (this.props.opacityEnd - this.props.opacityStart) * $ + this.props.opacityStart, f = new N(
         G,
         D,
         s,
@@ -401,9 +401,9 @@ class P extends y {
         n,
         o,
         r,
-        v
-      ), T = o * v / (n * 1);
-      T < 1 ? T < 0.75 ? this.lineContainer.appendChild(f.element) : this.lineTailContainer.appendChild(f.element) : f.edgeY <= m && (this.lineTailContainer.appendChild(f.element), d = f.edgeY);
+        w
+      ), O = o * w / (n * 1);
+      O < 1 ? O < 0.75 ? this.lineContainer.appendChild(f.element) : this.lineTailContainer.appendChild(f.element) : f.edgeY <= m && (this.lineTailContainer.appendChild(f.element), d = f.edgeY);
     }
     this.mask.draw(this.props, d);
   }
@@ -499,17 +499,17 @@ class k extends y {
     let l = 0, p = 0;
     this.props.onlyCircle ? (p = Math.round(n * this.props.drawStart), l = n * this.props.drawProgress) : (p = Math.min(n, n * this.props.drawStart / h), l = Math.min(n, n * this.props.drawProgress / h));
     for (let u = p; u < l; u++) {
-      const m = u / n * h, d = w(this.props.rgbCurve, m), g = x(
+      const m = u / n * h, d = v(this.props.rgbCurve, m), g = x(
         this.props.rgbStart,
         this.props.rgbEnd,
         d
-      ), v = (this.props.opacityEnd - this.props.opacityStart) * w(this.props.opacityCurve, m) + this.props.opacityStart, $ = u === Math.ceil(l) - 1 ? l - u : 1, I = new lt(
+      ), w = (this.props.opacityEnd - this.props.opacityStart) * v(this.props.opacityCurve, m) + this.props.opacityStart, $ = u === Math.ceil(l) - 1 ? l - u : 1, I = new lt(
         this.props.outerRadius,
         this.props.innerRadius,
         o * u,
         o * u + o * $ + this.props.paintOverlap,
         g,
-        v
+        w
       );
       this.arcContainer.insertBefore(I.element, this.arcContainer.firstChild);
     }
@@ -527,7 +527,7 @@ class k extends y {
           x(
             this.props.rgbStart,
             this.props.rgbEnd,
-            w(this.props.rgbCurve, h)
+            v(this.props.rgbCurve, h)
           ),
           this.props.rgbEnd,
           u,
@@ -729,9 +729,9 @@ class gt {
     t === "0" ? (this.sideUI.classList.remove("--iris"), this.sideUI.classList.add("--paint"), this.logo.type = "paint") : t === "1" && (this.sideUI.classList.add("--iris"), this.sideUI.classList.remove("--paint"), this.logo.type = "iris");
   }
 }
-window.onload = () => {
+"LOGO_DEV_ENV" in window && window.LOGO_DEV_ENV !== "test" && (window.onload = () => {
   new gt();
-};
+});
 export {
   ut as AkariLogo
 };
